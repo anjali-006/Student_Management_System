@@ -1,0 +1,118 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Page header */
+.page-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #2C3E50;
+    color: white;
+}
+
+.page-header h1 {
+    flex: 1;
+    font-size: 24px;
+}
+
+.back-button {
+    color: #ECF0F1;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #3498DB;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #2980B9;
+}
+
+/* Summary section */
+.summary-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #ECF0F1;
+}
+
+.summary-card {
+    background-color: #3498DB;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+}
+
+.summary-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.summary-card p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Announcements list */
+.announcements-list {
+    padding: 20px;
+}
+
+.announcements-list h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2C3E50;
+}
+
+.announcement-item {
+    background-color: #F8F9FA;
+    border: 1px solid #E5E5E5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.announcement-item h3 {
+    font-size: 20px;
+    color: #34495E;
+    margin-bottom: 10px;
+}
+
+.announcement-item p {
+    font-size: 16px;
+    color: #5D6D7E;
+    margin-bottom: 15px;
+}
+
+.announcement-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #7F8C8D;
+}
+
+.new-badge {
+    background-color: #E74C3C;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.announcement-item.new {
+    border-left: 5px solid #E74C3C;
+}
+
+.announcement-item:hover {
+    background-color: #EAECEE;
+}

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <style>
+        * {
+    margin: -1%;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #141E30, #243B55);
+    color: white;
+    overflow: hidden;
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    height: 650px;
+    background: linear-gradient(135deg, #2E3440, #4C566A);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Welcome Section */
+.welcome-section {
+    width: 50%;
+    background: linear-gradient(135deg, #3B4252, #434C5E);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    color: #E5E9F0;
+    position: relative;
+}
+
+.welcome-section h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 0 3px 10px rgba(255, 255, 255, 0.3);
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    color: #D8DEE9;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.welcome-section .illustration img {
+    max-width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.welcome-section .illustration img:hover {
+    transform: scale(1.05);
+}
+
+/* Decorative Circle */
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #8254FF, transparent);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Keyframe for Floating Effect */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Register Section */
+.register-section {
+    width: 53%;
+    padding: 50px 40px;
+    background: linear-gradient(135deg, #2E3440, #3B4252);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ECEFF4;
+    position: relative;
+}
+
+.register-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 0 3px 10px rgba(255, 255, 255, 0.3);
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #D8DEE9;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4C566A;
+    color: #E5E9F0;
+    font-size: 1em;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border: 2px solid #8254FF;
+    outline: none;
+    box-shadow: 0 0 10px rgba(130, 84, 255, 0.7);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #8254FF, #6D43D6);
+    color: white;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #6D43D6, #8254FF);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(130, 84, 255, 0.5);
+}
+
+/* Glowing Border Effect */
+.register-section::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #6D43D6, transparent);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 5s ease-in-out infinite reverse;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .welcome-section, .register-section {
+        width: 100%;
+        height: auto;
+    }
+
+    .register-section {
+        padding: 40px 20px;
+    }
+
+    .welcome-section {
+        padding: 30px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section: Welcome Message -->
+        <div class="welcome-section">
+            <h2>Welcome Back!</h2>
+            <p>Log in to access your account or sign up to get started.</p>
+            <div class="illustration">
+                <img src="{{ url_for('static', filename='online-learning-concept.png') }}" alt="Welcome Illustration">
+            </div>
+        </div>
+
+        <!-- Right Section: Register -->
+        <div class="register-section">
+            <h1>Register</h1>
+            <form method="POST" action="/signup" onsubmit="return validatePasswords()">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+
+                <span id="error-message" style="color: red; font-size: 0.9em;"></span>
+
+                <button type="submit" name="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for password validation
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match!";
+                return false; // Prevent form submission
+            }
+
+            // Check if the password is at least 6 characters long
+            if (password.length < 6) {
+                errorMessage.textContent = "Password must be at least 6 characters long!";
+                return false; // Prevent form submission
+            }
+
+            // Clear the error message if validation passes
+            errorMessage.textContent = "";
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+
+</html>

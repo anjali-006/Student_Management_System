@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Marks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_marks.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Assignment Marks</h2>
+        <form action="{{ url_for('add_assignment') }}" method="POST">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required><br>
+
+            <label for="dbms_marks">DBMS Marks:</label>
+            <input type="number" id="dbms_marks" name="dbms_marks" required><br>
+
+            <label for="econometrics_marks">Econometrics Marks:</label>
+            <input type="number" id="econometrics_marks" name="econometrics_marks" required><br>
+
+            <label for="math_marks">Math Marks:</label>
+            <input type="number" id="math_marks" name="math_marks" required><br>
+
+            <label for="calculus_marks">Calculus Marks:</label>
+            <input type="number" id="calculus_marks" name="calculus_marks" required><br>
+
+            <button type="submit">Add Marks</button>
+        </form>
+    </div>
+</body>
+</html>

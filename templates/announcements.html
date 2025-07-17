@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link rel="stylesheet" href="static/announcements.css">
+</head>
+<body>
+    <header class="page-header">
+        <h1>Announcements</h1>
+        <a href="{{ url_for('dashboard') }}" class="back-button">← Back to Dashboard</a>
+    </header>
+
+    <div class="summary-section">
+        <div class="summary-card">
+            <h3>Total Announcements</h3>
+            <p>{{ total_announcements }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Unread Announcements</h3>
+            <p>{{ unread_announcements }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Recent Announcements</h3>
+            <p>{{ recent_announcements }}</p>
+        </div>
+    </div>
+
+    <div class="announcements-list">
+        <h2>Recent Announcements</h2>
+        <ul>
+            {% for title, message, author, date_created, is_new in announcements %}
+            <li class="announcement-item {% if is_new %}new{% endif %}">
+                <h3>{{ title }}</h3>
+                <p>{{ message }}</p>
+                <div class="announcement-footer">
+                    <span>Posted by {{ author }} on {{ date_created.strftime('%Y-%m-%d') }}</span>
+                    {% if is_new %}
+                    <span class="new-badge">NEW</span>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Resources</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='library.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <header>
+            <div class="header-overlay">
+                <h1>Library Resources Borrow History</h1>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Availability</th>
+                    <th>Borrower</th>
+                    <th>Borrow Date</th>
+                    <th>Return Date</th>
+                </tr>
+                {% for record in library_data %}
+                <tr>
+                    <td>{{ record[0] }}</td> <!-- title -->
+                    <td>{{ record[1] }}</td> <!-- author -->
+                    <td>{{ record[2] }}</td> <!-- category -->
+                    <td>{{ record[3] }}</td> <!-- availability -->
+                    <td>{{ record[4] }}</td> <!-- borrower -->
+                    <td>{{ record[5] }}</td> <!-- borrow_date -->
+                    <td>{{ record[6] }}</td> <!-- return_date -->
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="back-link">⬅ Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="static/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js Library -->
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BrightMind</h2>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('addcourse') }}"><p>Course Management</p></a></li>
+            <li><a href="{{ url_for('addassignment') }}"><p>Students Marks</p></a></li>
+            <li><a href="{{ url_for('view_grades') }}"><p>Visualization of grades</p></a></li>
+            <li><a href="{{ url_for('view_announcements') }}">Announcements Module</a></li>
+            <li><a href="{{ url_for('library_resources') }}"><p>Library Management</p></a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+                <!-- User information could go here if needed -->
+            </div>
+        </header>
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h2>Welcome Back!{{name}}</h2>
+                <p>Set a new goal to keep pushing forward and achieve even more!</p>
+                <button>Learn More</button>
+            </div>
+            <img src="static/image.png" alt="User profile" class="welcome-image">
+        </div>
+        
+
+        <div class="stats-section">
+            <div class="stat">Added Courses<br><span>{{ total_courses }}</span></div>
+            <div class="stat">Added Students<br><span>{{ total_students }}</span></div>
+            
+        </div>
+        
+
+        <!-- Adjusted Actions Section for Grid Layout -->
+        <div class="actions-section">
+            <h3>Actions</h3>
+            <div class="action-cards-container">
+                <div class="action-card">
+                    <a href="{{ url_for('addcourse') }}">
+                        <span>+</span>
+                        <p>Add Course</p>
+                    </a>
+                </div>
+
+                <div class="action-card">
+                    <a href="{{ url_for('addassignment') }}">
+                        <span>+</span>
+                        <p>Add Marks</p>
+                    </a>
+                </div>
+
+                <div class="action-card">
+                    <a href="{{ url_for('view_grades') }}">
+                        <span>🔍</span>
+                        <p>View Grades</p>
+                    </a>
+                </div>
+
+                <div class="action-card">
+                    <a href="{{ url_for('library_resources') }}">
+                        <span>📚</span>
+                        <p>Library Resources</p>
+                    </a>
+                </div>
+
+                <div class="action-card">
+                    <a href="{{ url_for('view_announcements') }}">
+                        <span>📢</span>
+                        <p>View Announcements</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="marks-section">
+            <h3>Student Marks Summary</h3>
+            <table border="1">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Total Marks</th>
+                    <th>Average Marks</th>
+                    <th>Max Marks</th>
+                    <th>Min Marks</th>
+                </tr>
+                
+                {% for student in aggregation_data %}
+                <tr>
+                    <td>{{ student[0] }}</td> <!-- student_name -->
+                    <td>{{ student[1] }}</td> <!-- total_marks -->
+                    <td>{{ student[2] }}</td> <!-- avg_marks -->
+                    <td>{{ student[3] }}</td> <!-- max_marks -->
+                    <td>{{ student[4] }}</td> <!-- min_marks -->
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
