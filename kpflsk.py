@@ -1,7 +1,8 @@
 from flask import Flask, request, flash, redirect, url_for, render_template,jsonify,session
 from flask_mysqldb import MySQL
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+
 
 # Set the secret key for session management
 app.secret_key = '12345'  # Replace with a strong, unique key
@@ -12,31 +13,35 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'AnjaliSQL2006'  # Use your actual MySQL password
 app.config['MYSQL_DB'] = 'project'
 
+
 mysql = MySQL(app)
+app.config['MYSQL_AUTOCOMMIT'] = True
 
 # Route for rendering the login page and storing data
+from werkzeug.security import check_password_hash
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
+        password_input = request.form['password']
 
-        # Validate username and password
         cur = mysql.connection.cursor()
         cur.execute("SELECT name, password FROM signup WHERE username = %s", (username,))
         user = cur.fetchone()
-        
-        if user and user[1] == password:  # Replace with proper password hashing verification
-            # Store the user's name in the session
-            session['name'] = user[0]
-            flash('Login successful!', 'success')
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Invalid username or password!', 'danger')
-        
         cur.close()
 
-    return render_template('index.html')
+        if user:
+            name, password_hash = user
+            if check_password_hash(password_hash, password_input):
+                session['name'] = name
+                flash('Login successful!', 'success')
+                return redirect(url_for('dashboard'))
+        
+        flash('Invalid username or password!', 'danger')
+
+    return render_template('index.html.jinja2')
+
   # Login page
   # Renders the login page for GET requests
  # Render the login form
@@ -189,6 +194,11 @@ def validate_password(password):
         return "Password must contain at least one special character."
     return None
 
+from werkzeug.security import generate_password_hash
+
+from werkzeug.security import generate_password_hash
+import re
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -198,50 +208,52 @@ def signup():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
-        # Check if passwords match
+        print("DEBUG: Received signup:", name, email, username)
+
         if password != confirm_password:
             flash('Passwords do not match.', 'danger')
             return redirect(url_for('signup'))
 
-        # Validate password strength
         password_error = validate_password(password)
         if password_error:
             flash(password_error, 'danger')
             return redirect(url_for('signup'))
 
-        # Check if username or email already exists
         try:
             cur = mysql.connection.cursor()
-            cur.execute("""
-                SELECT * FROM signup WHERE email = %s OR username = %s
-            """, (email, username))
+            cur.execute("SELECT * FROM signup WHERE email = %s OR username = %s", (email, username))
             existing_user = cur.fetchone()
             if existing_user:
-                flash('Username or email already exists. Please use a different one.', 'danger')
                 cur.close()
+                flash('Username or email already exists.', 'danger')
                 return redirect(url_for('signup'))
         except Exception as e:
-            flash('An error occurred while checking for duplicates: ' + str(e), 'danger')
+            flash('Database check error: ' + str(e), 'danger')
             return redirect(url_for('signup'))
 
-        # Insert user into the database
         try:
+            hashed_password = generate_password_hash(password)
+
+            cur = mysql.connection.cursor()
             cur.execute("""
                 INSERT INTO signup (name, email, username, password) 
                 VALUES (%s, %s, %s, %s)
-            """, (name, email, username, password))
-            mysql.connection.commit()
+            """, (name, email, username, hashed_password))
+            
+            mysql.connection.commit()  # ✅ CRITICAL STEP
             cur.close()
 
-            flash('You successfully signed up! Please log in with your user ID and password.', 'success')
+            flash('Signup successful! Please log in.', 'success')
             return redirect(url_for('login'))
 
-
         except Exception as e:
-            flash('An error occurred: ' + str(e), 'danger')
+            flash('Signup failed: ' + str(e), 'danger')
             return redirect(url_for('signup'))
 
     return render_template('signup.html')
+
+
+
 
     
     
