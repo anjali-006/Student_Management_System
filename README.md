@@ -1,24 +1,24 @@
-# 📚 Student Management System
+#  Student Management System
 
 A web-based Student Management System built with **Flask** and **MySQL**, designed to simplify course, assignment, grade tracking, and resource management for educational institutions.
 
-## 🚀 Features
+##  Features
 
-- 🧑‍🎓 User Authentication (Login & Signup with secure password hashing)
-- 📝 Add and manage:
+-  User Authentication (Login & Signup with secure password hashing)
+-  Add and manage:
   - Student Assignments and Marks
   - Courses
   - Library Resources
   - Announcements
-- 📊 Dashboard with:
+-  Dashboard with:
   - Student marks aggregation (Total, Average, Max, Min)
   - Total course and student counts
-- 📈 Grade visualizations using Chart.js (via `/view_grades`)
-- 📚 Library Resource Tracking (with borrowing history)
+-  Grade visualizations using Chart.js (via `/view_grades`)
+-  Library Resource Tracking (with borrowing history)
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Tech         | Purpose                     |
 |--------------|-----------------------------|
@@ -31,7 +31,7 @@ A web-based Student Management System built with **Flask** and **MySQL**, design
 
 ---
 
-## 🖥️ Folder Structure
+##  Folder Structure
 
 ```
 project_root/
@@ -56,7 +56,7 @@ project_root/
 
 ---
 
-## 📦 Installation
+##  Installation
 
 1. **Clone the repository:**
 
@@ -150,7 +150,7 @@ app.config['MYSQL_PASSWORD'] = 'your_password'
 
 ---
 
-## ▶️ Run the App
+##  Run the App
 
 ```bash
 python kpflsk.py
@@ -161,7 +161,7 @@ Then open your browser and go to:
 
 ---
 
-## 🧪 Sample User Flow
+##  Sample User Flow
 
 1. Sign up using `/signup`
 2. Log in at `/login`
@@ -174,7 +174,7 @@ Then open your browser and go to:
 
 ---
 
-## 🔐 Password Validation
+##  Password Validation
 
 - At least 8 characters
 - One uppercase letter
